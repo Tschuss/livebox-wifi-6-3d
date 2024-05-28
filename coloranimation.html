@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-box id="myled1" position="0 1 -3" color="#FF0000" width="1" height="1" depth="1"></a-box>
+      <a-sky color="#ECECEC"></a-sky>
+    </a-scene>
+    <script>
+      // Selecciona el objeto a animar
+      var myLed1 = document.querySelector('#myled1');
+
+      // Define la primera animación y escucha el evento 'animationcomplete'
+      myLed1.setAttribute('animation__color1', {
+        property: 'material.color',
+        to: '#00FF00', // Verde
+        dur: 1000,
+        easing: 'linear'
+      });
+
+      myLed1.addEventListener('animationcomplete__color1', function () {
+        // Define la segunda animación al completar la primera
+        myLed1.setAttribute('animation__color2', {
+          property: 'material.color',
+          to: '#FF0000', // Rojo
+          dur: 1000,
+          //easing: 'linear',
+          loop: true
+        });
+      });
+
+      myLed1.addEventListener('animationcomplete__color2', function () {
+        // Define la primera animación nuevamente al completar la segunda para que se repita
+        myLed1.setAttribute('animation__color1', {
+          property: 'material.color',
+          to: '#00FF00', // Verde
+          dur: 1000,
+          //easing: 'linear',
+          loop: true
+        });
+      });
+    </script>
+  </body>
+</html>

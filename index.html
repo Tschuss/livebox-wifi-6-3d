@@ -1,0 +1,371 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene rotation="0 45 0">
+      <!--
+        <a-box id="mybox1" position="0 0 0" rotation="0 0 0" color="red" depth=".1" height="4" width=".1"></a-box>
+        <a-box id="mybox2" position="0 0 0" rotation="0 0 0" color="green" depth=".1" height=".1" width="4"></a-box>
+        <a-box id="mybox3" position="0 0 0" rotation="0 0 0" color="blue" depth="4" height=".1" width=".1"></a-box>
+
+    <!--  
+      ancho alto fondo
+        X     Z    Y 
+      -->
+      <a-box
+        id="mybox"
+        position="0 2 -1"
+        rotation="0 0 0"
+        color="grey"
+        depth="2"
+        height="4"
+        width="1"
+      ></a-box>
+      <a-box
+        id="mybox2"
+        position="-.4 2 -.8"
+        rotation="0 0 0"
+        color="grey"
+        depth="2"
+        height="4"
+        width=".2"
+      ></a-box>
+      <a-box
+        id="mybox3"
+        position=".4 2 -.8"
+        rotation="0 0 0"
+        color="grey"
+        depth="2"
+        height="4"
+        width=".2"
+      ></a-box>
+
+      <a-box
+        id="myphne1"
+        position="0 3.5 0.1"
+        rotation="0 0 0"
+        color="purple"
+        depth=".01"
+        height=".2"
+        width=".2"
+      ></a-box>
+      <a-box
+        id="myphne1a"
+        position="0 3.5 0.1"
+        rotation="0 0 0"
+        color="black"
+        depth=".02"
+        height=".1"
+        width=".1"
+      ></a-box>
+      <a-box
+        id="myphne2"
+        position="0 3.2 0.1"
+        rotation="0 0 0"
+        color="blue"
+        depth=".01"
+        height=".2"
+        width=".2"
+      ></a-box>
+      <a-box
+        id="myphne2b"
+        position="0 3.2 0.1"
+        rotation="0 0 0"
+        color="black"
+        depth=".02"
+        height=".1"
+        width=".1"
+      ></a-box>
+      <a-box
+        id="mywan"
+        position="0 2.6 0.1"
+        rotation="0 0 0"
+        color="yellow"
+        depth=".01"
+        height=".3"
+        width=".3"
+      ></a-box>
+      <a-box
+        id="mywanb"
+        position="0 2.6 0.1"
+        rotation="0 0 0"
+        color="black"
+        depth=".02"
+        height=".2"
+        width=".2"
+      ></a-box>
+      <a-box
+        id="myusb"
+        position="0 2.3 0.1"
+        rotation="0 0 0"
+        color="cyan"
+        depth=".01"
+        height=".1"
+        width=".4"
+      ></a-box>
+      <a-box
+        id="myusbb"
+        position="0 2.3 0.1"
+        rotation="0 0 0"
+        color="black"
+        depth=".02"
+        height=".05"
+        width=".3"
+      ></a-box>
+      <a-box
+        id="mylan1"
+        position="0 2 0.1"
+        rotation="0 0 0"
+        color="#555555"
+        depth=".01"
+        height=".3"
+        width=".3"
+      ></a-box>
+      <a-box
+        id="mylan1b"
+        position="0 2 0.1"
+        rotation="0 0 0"
+        color="black"
+        depth=".02"
+        height=".2"
+        width=".2"
+      ></a-box>
+      <a-box
+        id="mylan2"
+        position="0 1.6 0.1"
+        rotation="0 0 0"
+        color="#555555"
+        depth=".01"
+        height=".3"
+        width=".3"
+      ></a-box>
+      <a-box
+        id="mylan2b"
+        position="0 1.6 0.1"
+        rotation="0 0 0"
+        color="black"
+        depth=".02"
+        height=".2"
+        width=".2"
+      ></a-box>
+      <a-box
+        id="mylan3"
+        position="0 1.2 0.1"
+        rotation="0 0 0"
+        color="#555555"
+        depth=".01"
+        height=".3"
+        width=".3"
+      ></a-box>
+      <a-box
+        id="mylan3b"
+        position="0 1.2 0.1"
+        rotation="0 0 0"
+        color="black"
+        depth=".02"
+        height=".2"
+        width=".2"
+      ></a-box>
+      <a-box
+        id="mylan4"
+        position="0 0.8 0.1"
+        rotation="0 0 0"
+        color="#555555"
+        depth=".01"
+        height=".3"
+        width=".3"
+      ></a-box>
+      <a-box
+        id="mylan4b"
+        position="0 0.8 0.1"
+        rotation="0 0 0"
+        color="black"
+        depth=".02"
+        height=".2"
+        width=".2"
+      ></a-box>
+
+      <a-cylinder
+        id="mypower"
+        position="0 0.4 0.1"
+        rotation="90 0 0"
+        color="#555555"
+        height=".01"
+        radius=".1"
+      ></a-cylinder>
+      <a-cylinder
+        id="mypowerb"
+        position="0 0.4 0.1"
+        rotation="90 0 0"
+        color="black"
+        height=".02"
+        radius=".05"
+      ></a-cylinder>
+      <a-cylinder
+        id="myled1"
+        position="0 0.4 -2"
+        rotation="90 0 0"
+        color="red"
+        height=".01"
+        radius=".02"
+      ></a-cylinder>
+      <a-cylinder
+        id="myled2"
+        position="0 0.8 -2"
+        rotation="90 0 0"
+        color="lightgreen"
+        height=".01"
+        radius=".02"
+      ></a-cylinder>
+      <a-cylinder
+        id="myled3"
+        position="0 1.2 -2"
+        rotation="90 0 0"
+        color="lightgreen"
+        height=".01"
+        radius=".02"
+      ></a-cylinder>
+
+      <a-entity
+        camera="active: true"
+        wasd-controls
+        look-controls
+        position="-5 2 0"
+      ></a-entity>
+
+      <a-box
+        id="masorange1"
+        color="orange"
+        position="0 3.2 -2.03"
+        rotation="0 0 0"
+        depth=".01"
+        height=".5"
+        width=".1"
+      ></a-box>
+      <a-box
+        id="masorange2"
+        color="orange"
+        position="0 3.2 -2.03"
+        rotation="0 0 0"
+        depth=".01"
+        height=".1"
+        width=".5"
+      ></a-box>
+
+      <a-cylinder
+        id="masorange3"
+        position="0 3.2 -2.01"
+        rotation="90 0 0"
+        color="#FFFFFF"
+        height=".01"
+        radius=".25"
+      ></a-cylinder>
+      <a-cylinder
+        id="masorange4"
+        position="0 3.2 -2.02"
+        rotation="90 0 0"
+        color="grey"
+        height=".01"
+        radius=".18"
+      ></a-cylinder>
+      <!-- Definir el plano horizontal -->
+      <a-plane
+        position="0 0 0"
+        rotation="-90 0 0"
+        width="10"
+        height="10"
+        color="#8B4513"
+      ></a-plane>
+      <a-sky color="#FFDD99"></a-sky>
+    </a-scene>
+    <script>
+      // Selecciona el objeto a animar
+      var myLed1 = document.querySelector("#myled1");
+      var myLed2 = document.querySelector("#myled2");
+      var myLed3 = document.querySelector("#myled3");
+
+      // Define la primera animación y escucha el evento 'animationcomplete'
+      myLed1.setAttribute("animation__color1", {
+        property: "material.color",
+        to: "#66FF66", // Verde
+        dur: 500,
+        easing: "linear",
+      });
+      myLed1.addEventListener("animationcomplete__color1", function () {
+        // Define la segunda animación al completar la primera
+        myLed1.setAttribute("animation__color2", {
+          property: "material.color",
+          to: "#FF0000", // Rojo
+          dur: 500,
+          easing: "linear",
+        });
+      });
+      myLed1.addEventListener("animationcomplete__color2", function () {
+        // Define la primera animación nuevamente al completar la segunda para que se repita
+        myLed1.setAttribute("animation__color1", {
+          property: "material.color",
+          to: "#66FF66", // Verde
+          dur: 500,
+          easing: "linear",
+          loop: true,
+        });
+      });
+
+      // Define la primera animación y escucha el evento 'animationcomplete'
+      myLed2.setAttribute("animation__color1", {
+        property: "material.color",
+        to: "#FF0000",
+        dur: 600,
+        easing: "linear",
+      });
+      myLed2.addEventListener("animationcomplete__color1", function () {
+        // Define la segunda animación al completar la primera
+        myLed2.setAttribute("animation__color2", {
+          property: "material.color",
+          to: "#66FF66",
+          dur: 600,
+          easing: "linear",
+        });
+      });
+      myLed2.addEventListener("animationcomplete__color2", function () {
+        // Define la primera animación nuevamente al completar la segunda para que se repita
+        myLed2.setAttribute("animation__color1", {
+          property: "material.color",
+          to: "#FF0000",
+          dur: 600,
+          easing: "linear",
+          loop: true,
+        });
+      });
+
+      // Define la primera animación y escucha el evento 'animationcomplete'
+      myLed3.setAttribute("animation__color1", {
+        property: "material.color",
+        to: "#66FF66", // Verde
+        dur: 700,
+        easing: "linear",
+      });
+      myLed3.addEventListener("animationcomplete__color1", function () {
+        // Define la segunda animación al completar la primera
+        myLed3.setAttribute("animation__color2", {
+          property: "material.color",
+          to: "#FF0000", // Rojo
+          dur: 700,
+          easing: "linear",
+        });
+      });
+      myLed3.addEventListener("animationcomplete__color2", function () {
+        // Define la primera animación nuevamente al completar la segunda para que se repita
+        myLed3.setAttribute("animation__color1", {
+          property: "material.color",
+          to: "#66FF66", // Verde
+          dur: 700,
+          easing: "linear",
+          loop: true,
+        });
+      });
+      w;
+    </script>
+  </body>
+</html>
