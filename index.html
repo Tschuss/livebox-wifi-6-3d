@@ -1,6 +1,7 @@
 <html>
   <head>
-    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
   </head>
   <body>
     <a-scene rotation="0 45 0">
@@ -21,6 +22,7 @@
         depth="2"
         height="4"
         width="1"
+        shadow="cast:true"
       ></a-box>
       <a-box
         id="mybox2"
@@ -30,6 +32,7 @@
         depth="2"
         height="4"
         width=".2"
+        shadow="cast:true"
       ></a-box>
       <a-box
         id="mybox3"
@@ -39,6 +42,7 @@
         depth="2"
         height="4"
         width=".2"
+        shadow="cast:true"
       ></a-box>
 
       <a-box
@@ -227,13 +231,6 @@
         radius=".02"
       ></a-cylinder>
 
-      <a-entity
-        camera="active: true"
-        wasd-controls
-        look-controls
-        position="-5 2 0"
-      ></a-entity>
-
       <a-box
         id="masorange1"
         color="orange"
@@ -269,13 +266,72 @@
         height=".01"
         radius=".18"
       ></a-cylinder>
-      <!-- Definir el plano horizontal -->
-      <a-plane
+
+      <!-- lights -->
+      <a-entity
+        light="type: ambient; intensity: 0.5; color: #BBBBBB"
+      ></a-entity>
+      <a-entity
+        light="type: directional; color: #FFFFFF; intensity: 1; castShadow: true"
+        position="-10000 10000 0"
+      ></a-entity>
+
+      <!-- punto de luz onmidireccional
+      <a-entity
+        light="type: point; color: #FFFFFF; intensity: 1; castShadow: true"
+        position="-5 5 -5"
+      ></a-entity>
+       -->
+      <!-- punto de luz direccional: cono hacia el target -->
+       <a-entity id="lamp"
+        light="type: spot; color: #CCCCFF; intensity: 1; angle:30; castShadow: true; target: #mybox"
+        position="-5 5 -5"
+      ></a-entity>
+      <!-- light switch-->
+      <a-sphere position="-6 1 -6"
+                radius=.5
+                event-set__enter="_event: mouseenter; _target: #lamp; light.intensity:0"
+                event-set__leave="_event: mouseleave; _target: #lamp; light.intensity:1"
+              ></a-sphere>
+      
+      <!-- camera 
+      <a-entity
+        camera="active: true"
+        wasd-controls
+        look-controls
+        position="-7 2 -7"
+        rotation="0 180 0"
+      ></a-entity>
+      <a-entity 
+                camera="active: true" 
+                wasd-controls 
+                look-controls 
+                rotation-reader
+                position="10 2 -10" 
+                rotation="0 -225 0"  
+                id="cam2"></a-entity>
+-->
+      <a-camera position="0 2 5"><a-cursor></a-cursor></a-camera>
+      <!-- room 
+      <a-box
+        id="theroom"
+        position="0 0 0"
+        rotation="0 0 0"
+        color="black"
+        depth="40"
+        height="40"
+        width="40"
+      ></a-box>-->
+
+      <!-- mesa -->
+      <a-box
         position="0 0 0"
         rotation="-90 0 0"
         width="10"
         height="10"
+        depth="0.2"
         color="#8B4513"
+        shadow="cast:true"
       ></a-plane>
       <a-sky color="#FFDD99"></a-sky>
     </a-scene>
@@ -365,7 +421,19 @@
           loop: true,
         });
       });
-      w;
+    //reads the position and orientation of the camera, every second  
+    AFRAME.registerComponent('rotation-reader', {
+      tick: function () {
+        // `this.el` is the element.
+        // `object3D` is the three.js object.
+
+        // `rotation` is a three.js Euler using radians. `quaternion` also available.
+        console.log(this.el.object3D.rotation);
+
+        // `position` is a three.js Vector3.
+        console.log(this.el.object3D.position);
+      }
+    });
     </script>
   </body>
 </html>

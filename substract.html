@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v5.0.0/dist/aframe-extras.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <!-- Main shape (a box) -->
+      <a-entity id="mainBox" geometry="primitive: box; width: 3; height: 3; depth: 3" material="color: #4CC3D9"></a-entity>
+
+      <!-- Shape to subtract (a smaller box) -->
+      <a-entity id="hole" geometry="primitive: cylinder; width: 1.5; height: 1.5; depth: 1.5" position="0 0.75 0" material="color: red"></a-entity>
+    </a-scene>
+
+    <script>
+      AFRAME.registerComponent('subtract', {
+        init: function () {
+          const el = this.el;
+          const CSG = window.AFRAME.THREE.CSG;
+
+          // Get geometries from entities
+          const mainBox = document.querySelector('#mainBox').getObject3D('mesh').geometry;
+          const hole = document.querySelector('#hole').getObject3D('mesh').geometry;
+
+          // Perform CSG subtraction
+          const csgMain = CSG.fromGeometry(mainBox);
+          const csgHole = CSG.fromGeometry(hole);
+          const subtracted = csgMain.subtract(csgHole);
+
+          // Create new mesh with the resulting geometry
+          const material = new THREE.MeshStandardMaterial({color: '#4CC3D9'});
+          const resultMesh = new THREE.Mesh(CSG.toGeometry(subtracted), material);
+
+          // Replace the main box mesh with the resulting mesh
+          document.querySelector('#mainBox').setObject3D('mesh', resultMesh);
+        }
+      });
+
+      // Attach the component to an entity to trigger the operation
+      document.querySelector('#mainBox').setAttribute('subtract', '');
+    </script>
+  </body>
+</html>
