@@ -1,6 +1,7 @@
 <html>
   <head>
-    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.5.0/aframe.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
   </head>
   <body>
     <a-scene rotation="0 45 0">
@@ -8,10 +9,11 @@
         <a-box id="mybox1" position="0 0 0" rotation="0 0 0" color="red" depth=".1" height="4" width=".1"></a-box>
         <a-box id="mybox2" position="0 0 0" rotation="0 0 0" color="green" depth=".1" height=".1" width="4"></a-box>
         <a-box id="mybox3" position="0 0 0" rotation="0 0 0" color="blue" depth="4" height=".1" width=".1"></a-box>
-
-    <!--  
-      ancho alto fondo
-        X     Z    Y 
+  
+    orden de los parametros en POSITION:
+       ancho        alto             fondo
+      dcha-izq   arriba-abajo    delante-detras
+        X             Z                Y 
       -->
       <a-box
         id="mybox"
@@ -21,6 +23,7 @@
         depth="2"
         height="4"
         width="1"
+        shadow="cast:true"
       ></a-box>
       <a-box
         id="mybox2"
@@ -30,6 +33,7 @@
         depth="2"
         height="4"
         width=".2"
+        shadow="cast:true" 
       ></a-box>
       <a-box
         id="mybox3"
@@ -39,6 +43,7 @@
         depth="2"
         height="4"
         width=".2"
+        shadow="cast:true"
       ></a-box>
 
       <a-box
@@ -227,13 +232,6 @@
         radius=".02"
       ></a-cylinder>
 
-      <a-entity
-        camera="active: true"
-        wasd-controls
-        look-controls
-        position="-5 2 0"
-      ></a-entity>
-
       <a-box
         id="masorange1"
         color="orange"
@@ -269,15 +267,193 @@
         height=".01"
         radius=".18"
       ></a-cylinder>
-      <!-- Definir el plano horizontal -->
-      <a-plane
+
+      <!-- ambient light -->
+      <a-entity id="ambient"
+        light="type: ambient; intensity: 0.7; color: #BBBBBB"
+      ></a-entity>
+      <!--
+      <a-entity
+        light="type: directional; color: #FFFFFF; intensity: 1; castShadow: true"
+        position="10000 10000 0"
+      ></a-entity>
+      -->
+      <!-- punto de luz onmidireccional
+      <a-entity
+        light="type: point; color: #FFFFFF; intensity: 1; castShadow: true"
+        position="-5 5 -5"
+      ></a-entity>
+       -->
+      <!-- punto de luz direccional: cono hacia el target -->
+      <a-cone position="-16 16 -16"
+              radius-top="1.5"
+              radiud-bottom="3.5"
+              rotation= "45 -135 0"
+              event-set__off01="_event: mouseenter; _target: #lamp1; light.intensity:0"
+              event-set__off02="_event: mouseenter; _target: #lamp2; light.intensity:0"
+              event-set__on01="_event: mouseleave; _target: #lamp1; light.intensity:1"
+              event-set__on02="_event: mouseleave; _target: #lamp2; light.intensity:1"
+
+                ></a-cone>
+      <a-entity id="lamp1"
+        light="type: point; color: #FFFFFF; intensity: 1; castShadow: true"
+        position="-15 15 -15"
+      ></a-entity>
+      <a-entity id="lamp2"
+        light="type: spot; color: #CCCCFF; intensity: 1; angle:30; castShadow: true; target: #mybox"
+        position="-15 15 -15"
+      ></a-entity>
+      <!-- light switch-->
+      <a-box position="-6 1 -6"
+      depth=".5"
+      height=".5"
+      width=".5"
+      color="red"
+      event-set__on1="_event: click; _target: #lamp1; light.intensity:1"
+      event-set__on2="_event: click; _target: #lamp2; light.intensity:1"
+    ></a-box>
+<a-box position="-6.5 1 -6"
+                depth=".5"
+                height=".5"
+                width=".5"
+                color ="blue"
+                event-set__off1="_event: click; _target: #lamp1; light.intensity:0"
+                event-set__off2="_event: click; _target: #lamp2; light.intensity:0"
+
+              ></a-box>
+            <a-box position="-7.5 1 -6"
+            depth=".5"
+            height=".5"
+            width=".5"
+            color="green"
+            event-set__on1="_event: click; _target: #ambient; light.intensity:1"
+          ></a-box>
+          <a-box position="-8 1 -6"
+          depth=".5"
+          height=".5"
+          width=".5"
+          color="purple"
+          event-set__of1="_event: click; _target: #ambient; light.intensity:0"
+        ></a-box>
+  
+      <!-- camera tests
+      <a-entity
+        camera="active: true"
+        wasd-controls
+        look-controls
+        position="-7 2 -7"
+        rotation="0 180 0"
+      ></a-entity>
+      <a-entity 
+                camera="active: true" 
+                wasd-controls 
+                look-controls 
+                rotation-reader
+                position="10 2 -10" 
+                rotation="0 -225 0"  
+                id="cam2"></a-entity>
+-->
+      <a-camera position="0 2 5">
+        <a-entity cursor="fuse: true; fuseTimeout: 1500"
+                  position="0 0 -1"
+                  geometry= "primitive: sphere; radius: 0.005"
+                  material="color: #000000; shader: flat; opacity: 0.5"
+
+             
+        ></a-entity>
+         <!-- cursor animation is not working
+                  aniation__scale="property: scale; to: 3 3 3; dur: 1500; begin:cursor-fusing; fill=backwards"
+         -->
+         <!-- neither this other option         
+                    <a-entity animation="property: scale"
+                              to="3 3 3"
+                              dur="1500"
+                              startEvents="cursor-fusing"
+                              fill="backwards"
+                    ></a-entity>
+           -->   
+      </a-camera>
+      <!-- room 
+      <a-box
+        id="theroom"
         position="0 0 0"
-        rotation="-90 0 0"
-        width="10"
-        height="10"
+        rotation="0 0 0"
+        color="black"
+        depth="40"
+        height="40"
+        width="40"
+      ></a-box>-->
+
+      <!-- mesa -->
+      <a-box
+        position="0 0 0"
+        rotation="0 0 0"
+        width="8"
+        height="0.2"
+        depth="8"
         color="#8B4513"
+        shadow="cast:true"
       ></a-plane>
+      <a-cylinder
+        position="0 -20 0"
+        rotation="0 0 0"
+        height="40"
+        radius="3"
+        color="#8B4513"
+        shadow="cast:true"
+      ></a-cylinder>
+      
+      <!-- sky
       <a-sky color="#FFDD99"></a-sky>
+       -->
+
+      <!-- walls -->
+      <a-box position="40 0 0"
+      rotation="0 0 0"
+      color="#FFDD99"
+      depth="80"
+      height="80"
+      width="1" 
+      shadow="cast:true"></a-box>
+
+      <a-box position="-40 0 0"
+      rotation="0 0 0"
+      color="#FFDD99"
+      depth="80"
+      height="80"
+      width="1" 
+      shadow="cast:true"></a-box>
+
+      <a-box position="0 0 -40"
+      rotation="0 0 0"
+      color="#FFDD99"
+      depth="1"
+      height="80"
+      width="80" 
+      shadow="cast:true"></a-box>
+
+      <a-box position="0 0 40"
+      rotation="0 0 0"
+      color="#FFDD99"
+      depth="1"
+      height="80"
+      width="80" 
+      shadow="cast:true"></a-box>
+      
+      <a-box position="0 40 0"
+      rotation="0 0 0"
+      color="#FFDD99"
+      depth="80"
+      height="1"
+      width="80" 
+      shadow="cast:true"></a-box>
+      <a-box position="0 -40 0"
+      rotation="0 0 0"
+      color="#FFDD99"
+      depth="80"
+      height="1"
+      width="80" 
+      shadow="cast:true"></a-box>
     </a-scene>
     <script>
       // Selecciona el objeto a animar
@@ -365,7 +541,19 @@
           loop: true,
         });
       });
-      w;
+    //reads the position and orientation of the camera, every second  
+    AFRAME.registerComponent('rotation-reader', {
+      tick: function () {
+        // `this.el` is the element.
+        // `object3D` is the three.js object.
+
+        // `rotation` is a three.js Euler using radians. `quaternion` also available.
+        console.log(this.el.object3D.rotation);
+
+        // `position` is a three.js Vector3.
+        console.log(this.el.object3D.position);
+      }
+    });
     </script>
   </body>
 </html>
